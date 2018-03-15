@@ -1,5 +1,14 @@
 ext {
-
+//模块化配置需要依赖的模块
+   //配置launchModuiles为初始化的module
+    moduleSet = [
+            //新增的module后面追加即可，不需要再手动依赖（defaultAll代表完整项目）
+            //模块名:入口activity名
+            app: "entranceactivity",
+            module1: '\"/module1/module1activity\"',
+            module2: '\"/module2/module2activity\"',
+    ]
+    launchModule='app'
     android = [
                compileSdkVersion       : 27,
                buildToolsVersion       : "27.0.3",
@@ -105,6 +114,4 @@ ext {
                 "canary-release"           : "com.squareup.leakcanary:leakcanary-android-no-op:${version["canarySdkVersion"]}",
                 "umeng-analytics"          : "com.umeng.analytics:analytics:6.0.1"
         ]
-
-
 }

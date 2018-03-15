@@ -18,6 +18,7 @@ package me.jessyan.mvparms.demo.app;
 import android.app.Application;
 import android.content.Context;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.delegate.AppLifecycles;
 import com.jess.arms.utils.ArmsUtils;
 import com.squareup.leakcanary.LeakCanary;
@@ -64,7 +65,13 @@ public class AppLifecyclesImpl implements AppLifecycles {
 //                        }
 //                    });
             ButterKnife.setDebug(true);
+            //arouter配置
+            ARouter.openLog();     // 打印日志
+            ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
+
         }
+        //arouter配置
+        ARouter.init(application); // 尽可能早，推荐在Application中初始化
         //leakCanary内存泄露检查
         ArmsUtils.obtainAppComponentFromContext(application).extras().put(RefWatcher.class.getName(), BuildConfig.USE_CANARY ? LeakCanary.install(application) : RefWatcher.DISABLED);
         //扩展 AppManager 的远程遥控功能
